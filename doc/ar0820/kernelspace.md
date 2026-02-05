@@ -11,8 +11,8 @@ This document outlines the configuration parameters for Sensor AR0820, including
 
 2. Apply the following patches from this repository:
    ```bash
-   git am drivers.camera.scaling.sensor/patch/v6.12/0040-media-platform-intel-Add-AR0820-sensor-support-to-IPU.patch
-   git am drivers.camera.scaling.sensor/patch/v6.12/0041-media-i2c-max9x-Add-FSIN-GPIO-support-for-sensor-syn.patch
+   git am <current_repo>/patch/v6.12/0040-media-platform-intel-Add-AR0820-sensor-support-to-IPU.patch
+   git am <current_repo>/patch/v6.12/0041-media-i2c-max9x-Add-FSIN-GPIO-support-for-sensor-syn.patch
    ```
 
 3. Build and install the DKMS modules:
@@ -35,7 +35,7 @@ This document outlines the configuration parameters for Sensor AR0820, including
 
 2. Sensor ISP Physical Address Configuration:
    
-   The sensor I2C address is defined in `ipu6-drivers/include/media/i2c/ar0820.h`:
+   The sensor I2C address is defined in `<current_repo>/include/media/i2c/ar0820.h`:
    ```c
    #define AR0820_I2C_ADDRESS 0x6D  // Sensing ISP I2C Address is 0xDA >> 1
    ```
