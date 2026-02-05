@@ -58,15 +58,41 @@ This document details the configuration settings for the AR0820 GMSL sensor, pro
 
 ## Sample Userspace Command
 
+#### Sensor Device Selection
+
+| Sensor Number | Command Pipeline |
+|----------|----------|
+| 1 | gst-launch-1.0 icamerasrc num-buffers=-1 num-vc=1 scene-mode=normal device-name=**ar0820-1** printfps=true io-mode=dma_mode ! 'video/x-raw(memory:DMABuf),drm-format=UYVY,width=3840,height=2160' ! glimagesink sync=false |
+
 #### Frame Buffer Memory Type (IO Mode) Selection
+
 | IO Mode | Command Pipeline |
-|---|---|
-| MMAP | gst-launch-1.0 icamerasrc num-buffers=-1 device-name=ar0820-1 printfps=true io-mode=**1** ! '**video/x-raw,format=UYVY**, width=3840,height=2160' ! glimagesink sync=false|
-| DMA MODE| gst-launch-1.0 icamerasrc num-buffers=$num_buffers device-name=ar0820-1 printfps=true io-mode=**4** ! '**video/x-raw(memory:DMABuf)**, drm-format=UYVY, width=3840,height=2160' ! glimagesink sync=false |
+|----------|----------|
+| MMAP | gst-launch-1.0 icamerasrc num-buffers=-1 num-vc=1 scene-mode=normal device-name=ar0820-1 printfps=true io-mode=**mmap** ! '**video/x-raw,format=UYVY**,width=3840,height=2160' ! glimagesink sync=false |
+| DMA MODE | gst-launch-1.0 icamerasrc num-buffers=-1 num-vc=1 scene-mode=normal device-name=ar0820-1 printfps=true io-mode=**dma_mode** ! '**video/x-raw(memory:DMABuf),drm-format=UYVY**,width=3840,height=2160' ! glimagesink sync=false |
+
+#### Sensor Resolution Selection
+
+| Resolution | Command Pipeline |
+|----------|----------|
+| 3840x2160 | gst-launch-1.0 icamerasrc num-buffers=-1 scene-mode=normal device-name=ar0820-1 printfps=true io-mode=dma_mode ! 'video/x-raw(memory:DMABuf),drm-format=UYVY,**width=3840,height=2160**' ! glimagesink sync=false |
+
+#### Sensor Format Selection
+
+| Format | Command Pipeline |
+|----------|----------|
+| UYVY | gst-launch-1.0 icamerasrc num-buffers=-1 scene-mode=normal device-name=ar0820-1 printfps=true io-mode=dma_mode ! 'video/x-raw(memory:DMABuf),**drm-format=UYVY**,width=3840,height=2160' ! glimagesink sync=false |
+
+#### Number of Stream (Single Stream / Multi Stream) Selection
+
+| Number of Stream | Command Pipeline |
+|----------|----------|
+| x1 | gst-launch-1.0 icamerasrc num-buffers=-1 **num-vc=1** scene-mode=normal device-name=**ar0820-1** printfps=true io-mode=dma_mode ! 'video/x-raw(memory:DMABuf),drm-format=UYVY,width=3840,height=2160' ! glimagesink sync=false |
 
 #### FPS Result
-| IO Mode | FPS Result |
-|---|---|
-| MMAP | 30 |
-| DMA MODE | 30|
+
+| Number of Stream | IO Mode | FPS Result |
+|----------|----------|----------|
+| x1 | MMAP | 30 |
+| x1 | DMA MODE | 30 |
 
