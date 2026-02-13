@@ -4,11 +4,11 @@ This document details the configuration settings for the AR0233 GMSL sensor, pro
 
 ## BIOS Configuration Table
 
-**Note:** No External Clock required.
+> **Note:** No External Clock required.
 
 #### IPU6EPMTL Camera Option
 
-**Note:** AR0233 sensor reuses AR0820 sensor Custom HID
+> **Note:** AR0233 sensor reuses AR0820 sensor Custom HID
 
 |                            | Camera1 Link options |
 |---                         |---                   |
@@ -50,13 +50,19 @@ This document details the configuration settings for the AR0233 GMSL sensor, pro
 
 #### IPU6EPMTL Configuration
 
-1. Import files below to `/etc/camera/ipu6epmtl/sensor`
-   - ar0820-ar0233-1.xml
+1. Import file below to target system `/etc/camera/ipu6epmtl/sensor`
 
-2. Append new sensors into `/etc/camera/ipu6epmtl/libcamhal_profile.xml`
-   ```xml
-   <availableSensors value="...,ar0820-ar0233-1-0"/>
-   ```
+    [config/ar0233/ipu6epmtl/sensor/ar0820-ar0233-1.xml](../../config/ar0233/ipu6epmtl/sensor/ar0820-ar0233-1.xml)
+
+2. Register new sensors in target system `/etc/camera/ipu6epmtl/libcamhal_profile.xml`
+
+    [config/ar0233/ipu6epmtl/libcamhal_profile.xml](../../config/ar0233/ipu6epmtl/libcamhal_profile.xml)
+
+OR
+
+Clone & overwrite [ipu6epmtl](../../config/ar0233/ipu6epmtl) config in target system
+
+    sudo cp -r <current_repo>/config/ar0233/ipu6epmtl /etc/camera 
 
 ## Sample Userspace Command
 
